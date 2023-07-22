@@ -1,33 +1,37 @@
 {
-   "name": "travel-agency-server",
-   "version": "1.0.0",
-   "description": "",
-   "type": "module",
-   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "nodemon ./src/server.ts",
-      "start": "node ./dist/server.js",
-      "lint": "eslint . --ext .ts",
-      "lint:fix": "eslint . --ext .ts --fix",
-      "format": "prettier --write \"**/*.{js,ts,json}\""
-   },
-   "author": "Kabir",
-   "license": "ISC",
-   "dependencies": {
-      "cors": "^2.8.5",
-      "dayjs": "^1.11.9",
-      "dotenv": "^16.3.1",
-      "express": "^4.18.2",
-      "mongoose": "^7.4.0"
-   },
-   "devDependencies": {
-      "@types/express": "^4.17.17",
-      "@typescript-eslint/eslint-plugin": "^6.1.0",
-      "@typescript-eslint/parser": "^6.1.0",
-      "eslint": "^8.45.0",
-      "nodemon": "^3.0.1",
-      "prettier": "^3.0.0",
-      "ts-node": "^10.9.1",
-      "typescript": "^5.1.6"
-   }
+  "name": "travel-agency-server",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/server.ts",
+    "start": "node ./dist/server.js",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write \"**/*.{js,ts,json}\""
+  },
+  "author": "Kabir",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.9",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.4",
+    "@types/dotenv": "^4.0.3",
+    "@types/express": "^4.17.17",
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^12.12.17",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "eslint": "^8.45.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
 }
