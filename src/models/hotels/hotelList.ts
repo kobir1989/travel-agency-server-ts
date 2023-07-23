@@ -1,13 +1,13 @@
 import { Document, Schema, model } from 'mongoose';
 
-interface HotelsListTypes extends Document {
+export interface HotelsListTypes extends Document {
   name: string;
   country: string;
   city: string;
   ratings: number;
   availableRoom: number;
   images: string[];
-  HotelDescription: string;
+  description: string;
 }
 
 const hotelListSchema = new Schema<HotelsListTypes>(
@@ -36,8 +36,8 @@ const hotelListSchema = new Schema<HotelsListTypes>(
       type: [String],
       required: [true, 'Images is required'],
     },
-    HotelDescription: {
-      types: String,
+    description: {
+      type: String,
       required: [true, 'Description is required'],
     },
   },

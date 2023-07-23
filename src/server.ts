@@ -3,9 +3,10 @@ import { envConfig } from './config/envConfig.ts';
 import express, { Express } from 'express';
 import cors from 'cors';
 import { dbConnector } from './dbConnector/dbConnector.ts';
+import hotelRoute from './routes/hotelsRoutes.ts';
 
 const app: Express = express();
-
+//cors
 app.use(
   cors({
     credentials: true,
@@ -16,6 +17,10 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
+//api routes
+app.use('/api/v1', hotelRoute);
+
+//listener
 app.listen(envConfig.PORT, async () => {
   try {
     console.log(`Server Running on Port:${envConfig.PORT}`);

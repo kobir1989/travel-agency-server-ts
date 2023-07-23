@@ -1,6 +1,6 @@
 import { Document, Schema, model } from 'mongoose';
 
-interface Rooms extends Document {
+interface RoomsTypes extends Document {
   roomType: string;
   discount: number;
   oldPrice: number;
@@ -12,7 +12,7 @@ interface Rooms extends Document {
   images: string[];
 }
 
-const roomSchema = new Schema<Rooms>(
+const roomSchema = new Schema<RoomsTypes>(
   {
     roomType: {
       type: String,
@@ -55,6 +55,6 @@ const roomSchema = new Schema<Rooms>(
   }
 );
 
-const RoomsModal = model<Rooms>('Room', roomSchema);
+const RoomsModal = model<RoomsTypes>('Room', roomSchema);
 
 export default RoomsModal;
