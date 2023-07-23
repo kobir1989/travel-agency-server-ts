@@ -1,5 +1,5 @@
 import { Router } from 'express';
-const hotelRoute = Router();
+const hotelRoutes = Router();
 import {
   addNewHotel,
   getHotels,
@@ -7,9 +7,9 @@ import {
   updateHotel,
 } from '../controllers/hotelsControllers.ts';
 
-hotelRoute.get('/hotels-list', getHotels);
-hotelRoute.post('/add-new-hotel', addNewHotel);
-hotelRoute.put('/edit/hotel/:hotelId', updateHotel);
-hotelRoute.delete('/remove/hotel/:hotelId', removeHotel);
+hotelRoutes.get('/hotels-list', getHotels);
+hotelRoutes.post('/add-new-hotel', addNewHotel);
+hotelRoutes.put('/edit/hotel/:hotelId', updateHotel);
+hotelRoutes.delete('/remove/hotel/:hotelId', removeHotel);
 
-export default hotelRoute;
+export default hotelRoutes;

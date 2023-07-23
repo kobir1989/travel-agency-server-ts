@@ -1,6 +1,6 @@
-import { Document, Schema, model } from 'mongoose';
+import { Document, Schema, model, Types } from 'mongoose';
 
-interface RoomsTypes extends Document {
+export interface RoomsTypes extends Document {
   roomType: string;
   discount: number;
   oldPrice: number;
@@ -8,7 +8,7 @@ interface RoomsTypes extends Document {
   description: string;
   isAvailable: boolean;
   roomCapacity: number;
-  hotelId: string;
+  hotelId: Types.ObjectId;
   images: string[];
 }
 
@@ -41,13 +41,13 @@ const roomSchema = new Schema<RoomsTypes>(
       type: Number,
     },
     hotelId: {
-      Type: Schema.Types.ObjectId,
-      ref: 'Hotel',
+      type: Schema.Types.ObjectId,
+      ref: 'HotelList',
       required: [true, 'Hotel id is required'],
     },
     images: {
-      types: Array,
-      required: [true, 'Provide al least one image url'],
+      type: [String],
+      required: [true, 'Provide at least one image url'],
     },
   },
   {
