@@ -73,7 +73,7 @@ export const addNewRoom = async (req: Request, res: Response) => {
   }
 };
 
-//uodate existing room
+//update existing room
 export const updateRoom = async (req: Request, res: Response) => {
   try {
     const { roomId } = req.params;
@@ -91,7 +91,7 @@ export const updateRoom = async (req: Request, res: Response) => {
       hotelId,
       images,
     }: RoomsTypes = req.body;
-    //check if all the required fields are presnt in the req.body
+    //check if all the required fields are present in the req.body
     if (
       !roomType ||
       !currentPrice ||

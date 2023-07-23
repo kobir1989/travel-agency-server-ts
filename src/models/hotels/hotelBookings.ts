@@ -12,11 +12,11 @@ export interface HotelBookingTypes extends Document {
 }
 
 const hotelBookingSchema = new Schema<HotelBookingTypes>({
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: [true, 'User Id is required!'],
-  },
+  // userId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   required: [true, 'User Id is required!'],
+  // },
   hotelId: {
     type: Schema.Types.ObjectId,
     ref: 'HotelList',
