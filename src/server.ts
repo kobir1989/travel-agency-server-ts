@@ -6,6 +6,7 @@ import { dbConnector } from './dbConnector/dbConnector.ts';
 import hotelRoutes from './routes/hotelsRoutes.ts';
 import roomRoutes from './routes/roomsRoutes.ts';
 import bookingRoutes from './routes/bookingsRoutes.ts';
+import authRoutes from './routes/authRoutes.ts';
 
 const app: Express = express();
 //cors
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 app.use('/api/v1', hotelRoutes);
 app.use('/api/v1', roomRoutes);
 app.use('/api/v1', bookingRoutes);
+app.use('/api/v1', authRoutes);
 
 //listener
 app.listen(envConfig.PORT, async () => {

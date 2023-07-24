@@ -1,8 +1,9 @@
 import { Response } from 'express';
 
 interface ErrorObject {
-  message: string;
-  statusCode: number;
+  message?: string;
+  statusCode?: number;
+  errorCode?: string;
 }
 
 const errorResponse = (
@@ -10,9 +11,13 @@ const errorResponse = (
   error: ErrorObject,
   controller: string
 ) => {
-  console.log(`ERROR FROM ${controller} CONTROLLER`);
+  console.error(`ERROR FROM ${controller} CONTROLLER:`, error.message);
+  // Return the error response to the client
   return res.status(error.statusCode || 500).json({
-    message: error.message || 'Something went wrong',
+    error: {
+      message: error.message || 'Something went wrong',
+      code: error.errorCode || 'UNKNOWN_ERROR',
+    },
   });
 };
 

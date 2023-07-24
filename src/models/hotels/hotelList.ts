@@ -5,7 +5,7 @@ export interface HotelsListTypes extends Document {
   country: string;
   city: string;
   ratings: number;
-  availableRoom: number;
+  availableRoom: string;
   images: string[];
   description: string;
 }
@@ -29,7 +29,7 @@ const hotelListSchema = new Schema<HotelsListTypes>(
       required: [true, 'Ratings is required'],
     },
     availableRoom: {
-      type: Number,
+      type: String,
       required: [true, 'Aailable Room is required'],
     },
     images: {
