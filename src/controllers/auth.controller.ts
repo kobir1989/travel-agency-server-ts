@@ -1,4 +1,4 @@
-import User from '../models/users/user.ts';
+import User from '../models/users/user.model.ts';
 import bcrypt from 'bcrypt';
 import errorResponse from '../helpers/errorResponse.ts';
 import { Request, Response } from 'express';

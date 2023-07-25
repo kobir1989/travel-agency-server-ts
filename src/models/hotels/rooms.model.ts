@@ -55,6 +55,6 @@ const roomSchema = new Schema<RoomsTypes>(
   }
 );
 
-const RoomsModal = model<RoomsTypes>('Room', roomSchema);
+const Rooms = model<RoomsTypes>('Rooms', roomSchema);
 
-export default RoomsModal;
+export default Rooms;

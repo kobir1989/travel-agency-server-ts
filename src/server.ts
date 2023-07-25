@@ -3,10 +3,11 @@ import { envConfig } from './config/envConfig.ts';
 import express, { Express } from 'express';
 import cors from 'cors';
 import { dbConnector } from './dbConnector/dbConnector.ts';
-import hotelRoutes from './routes/hotelsRoutes.ts';
-import roomRoutes from './routes/roomsRoutes.ts';
-import bookingRoutes from './routes/bookingsRoutes.ts';
-import authRoutes from './routes/authRoutes.ts';
+import hotelRoutes from './routes/hotels.route.ts';
+import roomRoutes from './routes/rooms.route.ts';
+import bookingRoutes from './routes/bookings.route.ts';
+import authRoutes from './routes/auth.route.ts';
+import flightRoutes from './routes/flight.route.ts';
 
 const app: Express = express();
 //cors
@@ -25,6 +26,7 @@ app.use('/api/v1', hotelRoutes);
 app.use('/api/v1', roomRoutes);
 app.use('/api/v1', bookingRoutes);
 app.use('/api/v1', authRoutes);
+app.use('/api/v1/', flightRoutes);
 
 //listener
 app.listen(envConfig.PORT, async () => {

@@ -1,7 +1,7 @@
-import HotelsList from '../models/hotels/hotelList.ts';
+import HotelsList from '../models/hotels/hotelList.model.ts';
 import { Request, Response } from 'express';
 import errorResponse from '../helpers/errorResponse.ts';
-import { HotelsListTypes } from '../models/hotels/hotelList.ts';
+import { HotelsListTypes } from '../models/hotels/hotelList.model.ts';
 import {
   HotelDTO,
   validateHotelDTO,
@@ -25,15 +25,7 @@ export const addNewHotel = async (req: Request, res: Response) => {
     }
 
     //add new hotel to database
-    const newHotel = await HotelsList.create({
-      name: dto.name,
-      country: dto.country,
-      city: dto.city,
-      ratings: dto.ratings,
-      availableRoom: dto.availableRoom,
-      images: dto.images,
-      description: dto.description,
-    });
+    const newHotel = await HotelsList.create({ dto });
 
     //response with status 201 and hotel object
     res.status(201).json({ success: true, newHotel });
@@ -111,13 +103,7 @@ export const updateHotel = async (req: Request, res: Response) => {
     const updatedHotel = await HotelsList.findByIdAndUpdate(
       { _id: hotelId },
       {
-        name: dto.name,
-        country: dto.country,
-        city: dto.city,
-        ratings: dto.ratings,
-        availableRoom: dto.availableRoom,
-        images: dto.images,
-        description: dto.description,
+        dto,
       },
       { runValidators: true, new: true }
     );

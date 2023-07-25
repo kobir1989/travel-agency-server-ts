@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import errorResponse from '../helpers/errorResponse.ts';
-import RoomsModal from '../models/hotels/Rooms.ts';
+import Rooms from '../models/hotels/rooms.model.ts';
 import {
   RoomDTO,
   validateRoomDTO,
@@ -18,7 +18,7 @@ export const getRooms = async (req: Request, res: Response) => {
   try {
     const { hotelId } = req.params;
     //find all the rooms that metch with hootel id
-    const rooms = await RoomsModal.find({ hotelId: hotelId });
+    const rooms = await Rooms.find({ hotelId: hotelId });
 
     res.status(200).json({ success: true, rooms });
   } catch (error: unknown) {
@@ -44,17 +44,7 @@ export const addNewRoom = async (req: Request, res: Response) => {
     }
 
     // add new room to database
-    const newRoom = await RoomsModal.create({
-      roomType: dto.roomType,
-      discount: dto.discount,
-      oldPrice: dto.oldPrice,
-      currentPrice: dto.currentPrice,
-      description: dto.description,
-      isAvailable: dto.isAvailable,
-      roomCapacity: dto.roomCapacity,
-      hotelId: dto.hotelId,
-      images: dto.images,
-    });
+    const newRoom = await Rooms.create({ dto });
 
     return res.status(201).json({ success: true, newRoom });
   } catch (error: unknown) {
@@ -85,21 +75,11 @@ export const updateRoom = async (req: Request, res: Response) => {
       return res.status(400).json(updateRoomError);
     }
     // Update existing room with new incoming DTO
-    const updatedRoom = await RoomsModal.findByIdAndUpdate(
+    const updatedRoom = await Rooms.findByIdAndUpdate(
       {
         _id: roomId,
       },
-      {
-        roomType: dto.roomType,
-        discount: dto.discount,
-        oldPrice: dto.oldPrice,
-        currentPrice: dto.currentPrice,
-        description: dto.description,
-        isAvailable: dto.isAvailable,
-        roomCapacity: dto.roomCapacity,
-        hotelId: dto.hotelId,
-        images: dto.images,
-      },
+      { dto },
       { runValidators: true, new: true }
     );
     return res.status(200).json({ success: true, updatedRoom });
@@ -125,7 +105,7 @@ export const removeRoom = async (req: Request, res: Response) => {
         .status(400)
         .json({ success: false, message: 'Room id is Requied!' });
     }
-    const removedRoom = await RoomsModal.findByIdAndRemove({ _id: roomId });
+    const removedRoom = await Rooms.findByIdAndRemove({ _id: roomId });
     return res.status(200).json({ success: true, removedRoom });
   } catch (error: unknown) {
     errorResponse(res, error as Error, 'REMOVE-ROOMS');

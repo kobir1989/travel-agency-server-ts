@@ -1,4 +1,4 @@
-export interface BookingDTO {
+export interface HotelBookingDTO {
   userId: string;
   hotelId: string;
   roomId: string;
@@ -9,7 +9,9 @@ export interface BookingDTO {
   numberOfGuests: number;
 }
 
-export const validateBookingDTO = (dto: BookingDTO): object | null => {
+export const validateHotelBookingDTO = (
+  dto: HotelBookingDTO
+): object | null => {
   if (
     !dto.userId ||
     !dto.hotelId ||

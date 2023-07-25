@@ -38,6 +38,7 @@ const flightSchema = new Schema<FlightType>({
     required: [true, 'Flight number is required'],
     trim: true,
     lowercase: true,
+    unique: true,
   },
   arrivalDate: {
     type: String,

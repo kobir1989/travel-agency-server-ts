@@ -24,7 +24,7 @@ const hotelBookingSchema = new Schema<HotelBookingTypes>({
   },
   roomId: {
     type: Schema.Types.ObjectId,
-    ref: 'Room',
+    ref: 'Rooms',
     required: [true, 'Room Id is required!'],
   },
   checkInDate: {
@@ -49,9 +49,9 @@ const hotelBookingSchema = new Schema<HotelBookingTypes>({
   },
 });
 
-const HotelBookingModel = model<HotelBookingTypes>(
+const HotelBooking = model<HotelBookingTypes>(
   'HotelBooking',
   hotelBookingSchema
 );
 
-export default HotelBookingModel;
+export default HotelBooking;
