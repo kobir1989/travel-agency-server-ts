@@ -40,7 +40,6 @@ const userSchema = new Schema<UserTypes>({
   },
   role: {
     type: String,
-    required: [true, 'User Role is Required'],
     enum: Object.values(AuthRole),
     default: AuthRole.USER,
   },
