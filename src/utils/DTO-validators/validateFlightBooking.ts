@@ -1,12 +1,4 @@
-export interface FlightBookingDTO {
-  userId: string;
-  flightId: string;
-  paymentId: string;
-  paymentType: string;
-  numberOfPassangers: number;
-  totalPrice: number;
-  flightStatus: string;
-}
+import { FlightBookingDTO } from '../../types/bookingTypes.ts';
 
 export const validateFlightBookingDTO = (
   dto: FlightBookingDTO

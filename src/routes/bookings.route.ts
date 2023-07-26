@@ -9,10 +9,11 @@ import {
   removeFlightBooking,
   updateFlightBookingDetails,
 } from '../controllers/flightBooking.controller.ts';
+import { isAuthenticated } from '../middlewares/isAuthenticated.ts';
 const bookingRoutes = Router();
 
 //hotel bookings
-bookingRoutes.get('/hotel/bookings', getBookingDetails); //Protected
+bookingRoutes.get('/hotel/bookings', isAuthenticated, getBookingDetails); //Protected
 bookingRoutes.post('/hotel/add-new-booking/', createNewBooking); //Protected
 bookingRoutes.put('/hotel/update-booking/:hotelBookingId', createNewBooking); //Protected
 bookingRoutes.delete('/hotel/remove-booking/:hotelBookingId', createNewBooking); //Protected

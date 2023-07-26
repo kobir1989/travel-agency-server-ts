@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
 import errorResponse from '../helpers/errorResponse.ts';
 import Rooms from '../models/hotels/rooms.model.ts';
-import {
-  RoomDTO,
-  validateRoomDTO,
-} from '../utils/DTO-validators/validateRoom.ts';
+import { validateRoomDTO } from '../utils/DTO-validators/validateRoom.ts';
+import { RoomDTO } from '../types/roomTypes.ts';
 
 /************************************************************
  * get Rooms controller

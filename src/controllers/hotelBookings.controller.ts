@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
 import HotelBooking from '../models/hotels/hotelBookings.model.ts';
 import errorResponse from '../helpers/errorResponse.ts';
-import {
-  HotelBookingDTO,
-  validateHotelBookingDTO,
-} from '../utils/DTO-validators/validateHotelBooking.ts';
+import { validateHotelBookingDTO } from '../utils/DTO-validators/validateHotelBooking.ts';
+import { HotelBookingDTO } from '../types/bookingTypes.ts';
 
 /*********************************************************************
  * get bookings details controller

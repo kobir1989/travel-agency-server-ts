@@ -1,11 +1,9 @@
 import errorResponse from '../helpers/errorResponse.ts';
 import FlightBooking from '../models/flights/flightBooking.model.ts';
 import { Request, Response } from 'express';
-import {
-  FlightBookingDTO,
-  validateFlightBookingDTO,
-} from '../utils/DTO-validators/validateFlightBooking.ts';
+import { validateFlightBookingDTO } from '../utils/DTO-validators/validateFlightBooking.ts';
 import Flight from '../models/flights/flights.model.ts';
+import { FlightBookingDTO } from '../types/bookingTypes.ts';
 
 /****************************************************************************
  * get flight booking controller.

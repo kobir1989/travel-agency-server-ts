@@ -2,10 +2,8 @@ import HotelsList from '../models/hotels/hotelList.model.ts';
 import { Request, Response } from 'express';
 import errorResponse from '../helpers/errorResponse.ts';
 import { HotelsListTypes } from '../models/hotels/hotelList.model.ts';
-import {
-  HotelDTO,
-  validateHotelDTO,
-} from '../utils/DTO-validators/validateHotel.ts';
+import { validateHotelDTO } from '../utils/DTO-validators/validateHotel.ts';
+import { HotelDTO } from '../types/hotelTypes.ts';
 
 /************************************************************
  * add new hotel Controller

@@ -4,14 +4,10 @@ import errorResponse from '../helpers/errorResponse.ts';
 import { Request, Response } from 'express';
 import { envConfig } from '../config/envConfig.ts';
 import { generateToken } from '../helpers/generateToken.ts';
-import {
-  UserSignupDTO,
-  validateUserSignupDTO,
-} from '../utils/DTO-validators/validateUserSignup.ts';
-import {
-  UserLoginDTO,
-  validateUserLoginDTO,
-} from '../utils/DTO-validators/validateUserLogin.ts';
+import { validateUserSignupDTO } from '../utils/DTO-validators/validateUserSignup.ts';
+import { validateUserLoginDTO } from '../utils/DTO-validators/validateUserLogin.ts';
+import { UserLoginDTO, UserSignupDTO } from '../types/authTypes.ts';
+import jwt from 'jsonwebtoken';
 
 /****************************************************************************
  * Signup controller.
@@ -50,6 +46,7 @@ export const signup = async (req: Request, res: Response) => {
     //create access token
     const accessToken = generateToken({
       userId: newUser._id,
+      email: newUser.email,
       userRole: newUser.role,
       duration: '1d',
       secret: envConfig.ACCESS_SECRET as string,
@@ -143,5 +140,54 @@ export const login = async (req: Request, res: Response) => {
     });
   } catch (error: unknown) {
     errorResponse(res, error as Error, 'LOGIN');
+  }
+};
+
+/****************************************************************************
+ * Refresh Token Controller
+ * @getRefreshToken
+ * @method POST
+ * @param {Request} request - The HTTP request object.
+ * @param {Response} response - The HTTP response object.
+ * @returns {Promise<Response>}
+ ***************************************************************************/
+
+interface TokenPayload {
+  _id: string;
+  role: string;
+  email: string;
+}
+
+export const refreshToken = async (req: Request, res: Response) => {
+  try {
+    const refreshToken: string | undefined | null = req?.body?.refreshToken;
+    //Check req.body has refreshToken
+    if (!refreshToken) {
+      return res.status(401).json({ success: false, message: 'Unauthorized!' });
+    }
+
+    //verify refresh token
+    const verifyRefreshToken = jwt.verify(
+      refreshToken,
+      envConfig.REFRESH_SECRET as string
+    ) as TokenPayload;
+
+    //send 401 status if not valid or tempered
+    if (!verifyRefreshToken) {
+      return res.status(401).json({ success: false, message: 'Unauthorized!' });
+    }
+
+    //generate new access token
+    const accessToken = generateToken({
+      userId: verifyRefreshToken._id,
+      userRole: verifyRefreshToken.role,
+      duration: '1d',
+      secret: envConfig.ACCESS_SECRET as string,
+    });
+
+    //send access token to client
+    return res.status(201).json({ success: true, accessToken });
+  } catch (error: unknown) {
+    errorResponse(res, error as Error, 'GET-REFRESH-TOKEN');
   }
 };

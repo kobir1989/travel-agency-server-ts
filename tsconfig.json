@@ -10,9 +10,10 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "allowUmdGlobalAccess": true
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./src/types/express.d.ts"],
   "exclude": ["node_modules"],
   "ts-node": {
     "esm": true

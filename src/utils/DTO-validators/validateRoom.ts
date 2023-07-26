@@ -1,14 +1,4 @@
-export interface RoomDTO {
-  roomType: string;
-  discount: number;
-  oldPrice: number;
-  currentPrice: number;
-  description: string;
-  isAvailable: boolean;
-  roomCapacity: number;
-  hotelId: string;
-  images: string[];
-}
+import { RoomDTO } from '../../types/roomTypes.ts';
 
 export const validateRoomDTO = (dto: RoomDTO): object | null => {
   if (

@@ -1,13 +1,4 @@
-export interface HotelBookingDTO {
-  userId: string;
-  hotelId: string;
-  roomId: string;
-  checkInDate: string;
-  checkOutDate: string;
-  totalNights: number;
-  totalPrice: number;
-  numberOfGuests: number;
-}
+import { HotelBookingDTO } from '../../types/bookingTypes.ts';
 
 export const validateHotelBookingDTO = (
   dto: HotelBookingDTO

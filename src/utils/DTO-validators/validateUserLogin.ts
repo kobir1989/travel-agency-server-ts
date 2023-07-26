@@ -1,10 +1,5 @@
 import { isValidEmail } from '../emailValidator.ts';
-
-// Define the UserLoginDTO interface for user login
-export interface UserLoginDTO {
-  email: string;
-  password: string;
-}
+import { UserLoginDTO } from '../../types/authTypes.ts';
 
 export const validateUserLoginDTO = (dto: UserLoginDTO): object | null => {
   if (!dto.email || !dto.password) {

@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
 import errorResponse from '../helpers/errorResponse.ts';
 import Flight from '../models/flights/flights.model.ts';
-import {
-  FlightDTO,
-  validateFlightDTO,
-} from '../utils/DTO-validators/validateFlight.ts';
+import { validateFlightDTO } from '../utils/DTO-validators/validateFlight.ts';
+import { FlightDTO } from '../types/flightTypes.ts';
 
 /****************************************************************************
  * Flights controller.

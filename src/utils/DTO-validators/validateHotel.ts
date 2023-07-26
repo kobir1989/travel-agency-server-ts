@@ -1,12 +1,4 @@
-export interface HotelDTO {
-  name: string;
-  country: string;
-  city: string;
-  ratings: number;
-  availableRoom: string;
-  images: string[];
-  description: string;
-}
+import { HotelDTO } from '../../types/hotelTypes.ts';
 
 export const validateHotelDTO = (dto: HotelDTO): object | null => {
   if (

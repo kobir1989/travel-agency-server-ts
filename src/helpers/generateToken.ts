@@ -1,11 +1,5 @@
 import jwt from 'jsonwebtoken';
-
-type Token = {
-  userId: string;
-  userRole?: string;
-  duration: string;
-  secret: string;
-};
+import { GenrateTokens } from '../types/authTypes.ts';
 
 // Function to generate token
 export const generateToken = ({
@@ -13,8 +7,9 @@ export const generateToken = ({
   userRole,
   duration,
   secret,
-}: Token): string => {
-  const token = jwt.sign({ _id: userId, role: userRole }, secret, {
+  email,
+}: GenrateTokens): string => {
+  const token = jwt.sign({ _id: userId, role: userRole, email }, secret, {
     expiresIn: duration,
   });
   return token;

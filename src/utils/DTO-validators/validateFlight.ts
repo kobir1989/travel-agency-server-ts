@@ -1,16 +1,4 @@
-export interface FlightDTO {
-  airlinesName: string;
-  arrivalAirportName: string;
-  departureAirportName: string;
-  flightNumber: string;
-  departure: string;
-  arrival: string;
-  departureDate: string;
-  arrivalDate: string;
-  duration: string;
-  baggage: string;
-  seatAvailability: string[];
-}
+import { FlightDTO } from '../../types/flightTypes.ts';
 
 export const validateFlightDTO = (dto?: FlightDTO): object | null => {
   if (
