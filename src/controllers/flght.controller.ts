@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import errorResponse from '../helpers/errorResponse.ts';
-import Flight from '../models/flights/flights.model.ts';
+import Flight, { FlightType } from '../models/flights/flights.model.ts';
 import { validateFlightDTO } from '../utils/DTO-validators/validateFlight.ts';
 import { FlightDTO } from '../types/flightTypes.ts';
 
@@ -14,8 +14,29 @@ import { FlightDTO } from '../types/flightTypes.ts';
  ***************************************************************************/
 export const getFligths = async (req: Request, res: Response) => {
   try {
-    const flights = await Flight.find();
-    return res.status(200).json({ success: true, flights });
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+
+    // Calculate the number of documents to skip based on the current page and limit
+    const skip = (page - 1) * limit;
+
+    // Fetch the total count of documents in the collection
+    const totalCount = await Flight.countDocuments();
+
+    // Fetch flights based on pagination
+    const flight: FlightType[] = await Flight.find().skip(skip).limit(limit);
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(totalCount / limit);
+
+    // Return the paginated response
+    return res.status(200).json({
+      success: true,
+      currentPage: page,
+      totalPages,
+      totalCount,
+      flight,
+    });
   } catch (error: unknown) {
     errorResponse(res, error as Error, 'GET-FLIGHT');
   }

@@ -1,6 +1,6 @@
 import { Document, Schema, model } from 'mongoose';
 
-interface FlightType extends Document {
+export interface FlightType extends Document {
   airlinesName: string;
   arrivalAirportName: string;
   departureAirportName: string;

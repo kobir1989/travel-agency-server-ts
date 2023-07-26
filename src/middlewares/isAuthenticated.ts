@@ -5,7 +5,6 @@ import { envConfig } from '../config/envConfig.ts';
 import User from '../models/users/user.model.ts';
 import { TokenPayload } from '../types/authTypes.ts';
 
-//TODO: move it
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
@@ -22,6 +21,7 @@ export const isAuthenticated = async (
 ) => {
   try {
     let token = '';
+
     //check if req.headears has Bearer token (access token)
     if (
       req.headers.authorization &&
@@ -35,6 +35,7 @@ export const isAuthenticated = async (
         .json({ success: false, message: 'You are not authorized!' });
     }
     //verify token also add type assertion as typescript can't inference the type of the tokenPayload
+
     const verifyToken = jwt.verify(
       token,
       envConfig.ACCESS_SECRET as string

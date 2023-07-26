@@ -28,11 +28,16 @@ export const signup = async (req: Request, res: Response) => {
       return res.status(400).json(validationError);
     }
 
+    //check user email unique or not
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser?.email === dto.email) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'User already exists!' });
+    }
+
     // Encrypt password using bcrypt
-    const encryptPassword = await bcrypt.hash(
-      dto.password,
-      envConfig.SALT_ROUND as string
-    );
+    const encryptPassword = await bcrypt.hash(dto.password, 12);
 
     // Create new user and save it to DB
     const newUser = await User.create({
@@ -103,7 +108,8 @@ export const login = async (req: Request, res: Response) => {
     }
 
     //compare password using bcrypt
-    const comparePass = await bcrypt.compare(getUser?.password, dto.password);
+    const comparePass = await bcrypt.compare(dto.password, getUser.password);
+    console.log(comparePass);
 
     //send 401 response if password is incorrect
     if (!comparePass) {

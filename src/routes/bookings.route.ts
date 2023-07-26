@@ -16,11 +16,7 @@ const bookingRoutes = Router();
 bookingRoutes.get('/hotel/bookings', isAuthenticated, getBookingDetails);
 
 //create new hotel booking (protected)
-bookingRoutes.post(
-  '/hotel/add-new-booking/',
-  isAuthenticated,
-  createNewBooking
-);
+bookingRoutes.post('/hotel/add-new-booking', isAuthenticated, createNewBooking);
 
 //update hotel booking (protected)
 bookingRoutes.put(
