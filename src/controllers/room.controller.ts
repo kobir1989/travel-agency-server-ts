@@ -34,6 +34,13 @@ export const getRooms = async (req: Request, res: Response) => {
  ************************************************************/
 export const addNewRoom = async (req: Request, res: Response) => {
   try {
+    //check if the user role is Admin
+    if (req.user && req.user.role !== 'ADMIN') {
+      return res
+        .status(401)
+        .json({ success: false, message: 'Access denied!' });
+    }
+
     const dto: RoomDTO = req.body;
     //Validate incoming request DTO
     const addRoomError = validateRoomDTO(dto);
@@ -60,6 +67,13 @@ export const addNewRoom = async (req: Request, res: Response) => {
  ************************************************************/
 export const updateRoom = async (req: Request, res: Response) => {
   try {
+    //check if the user role is Admin
+    if (req.user && req.user.role !== 'ADMIN') {
+      return res
+        .status(401)
+        .json({ success: false, message: 'Access denied!' });
+    }
+
     const { roomId } = req.params;
     if (!roomId) {
       return res
@@ -96,6 +110,13 @@ export const updateRoom = async (req: Request, res: Response) => {
  ************************************************************/
 export const removeRoom = async (req: Request, res: Response) => {
   try {
+    //check if the user role is Admin
+    if (req.user && req.user.role !== 'ADMIN') {
+      return res
+        .status(401)
+        .json({ success: false, message: 'Access denied!' });
+    }
+
     const { roomId } = req.params;
     //if room id is not present in the req.body return error response
     if (!roomId) {

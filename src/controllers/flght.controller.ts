@@ -31,6 +31,13 @@ export const getFligths = async (req: Request, res: Response) => {
  ***************************************************************************/
 export const addNewFlight = async (req: Request, res: Response) => {
   try {
+    //check if the user role is Admin
+    if (req.user && req.user.role !== 'ADMIN') {
+      return res
+        .status(401)
+        .json({ success: false, message: 'Access denied!' });
+    }
+
     const dto: FlightDTO = req.body;
     //validate incoming request DTO
     const addFlightError = validateFlightDTO(dto);
@@ -65,13 +72,14 @@ export const addNewFlight = async (req: Request, res: Response) => {
  ***************************************************************************/
 export const updateFlight = async (res: Response, req: Request) => {
   try {
-    const { userId, flightId } = req.params;
-    //check user id exists
-    if (!userId) {
+    //check if the user role is Admin
+    if (req.user && req.user.role !== 'ADMIN') {
       return res
         .status(401)
-        .json({ success: false, message: 'Unauthorized user!' });
+        .json({ success: false, message: 'Access denied!' });
     }
+
+    const { flightId } = req.params;
     //check flight id exists
     if (!flightId) {
       return res.status(400).json;
@@ -106,6 +114,13 @@ export const updateFlight = async (res: Response, req: Request) => {
  ***************************************************************************/
 export const removeFlight = async (req: Request, res: Response) => {
   try {
+    //check if the user role is Admin
+    if (req.user && req.user.role !== 'ADMIN') {
+      return res
+        .status(401)
+        .json({ success: false, message: 'Access denied!' });
+    }
+
     //check flight id exists or not
     const { flightId } = req.params;
     if (!flightId) {

@@ -15,6 +15,13 @@ import { HotelDTO } from '../types/hotelTypes.ts';
  ************************************************************/
 export const addNewHotel = async (req: Request, res: Response) => {
   try {
+    //check if the user role is Admin
+    if (req.user && req.user.role !== 'ADMIN') {
+      return res
+        .status(401)
+        .json({ success: false, message: 'Access denied!' });
+    }
+
     const dto: HotelDTO = req.body;
     //Validate add new hotel incoming request DTO
     const addNewHotelError = validateHotelDTO(dto);
@@ -82,6 +89,13 @@ export const getHotels = async (req: Request, res: Response) => {
  ************************************************************/
 export const updateHotel = async (req: Request, res: Response) => {
   try {
+    //check if the user role is Admin
+    if (req.user && req.user.role !== 'ADMIN') {
+      return res
+        .status(401)
+        .json({ success: false, message: 'Access denied!' });
+    }
+
     const { hotelId } = req.params;
     //check if hotel id exists
     if (!hotelId) {
@@ -122,6 +136,13 @@ export const updateHotel = async (req: Request, res: Response) => {
  ************************************************************/
 export const removeHotel = async (req: Request, res: Response) => {
   try {
+    //check if the user role is Admin
+    if (req.user && req.user.role !== 'ADMIN') {
+      return res
+        .status(401)
+        .json({ success: false, message: 'Access denied!' });
+    }
+
     const { hotelId } = req.params;
     if (!hotelId) {
       return res

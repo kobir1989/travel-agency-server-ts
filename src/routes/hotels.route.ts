@@ -6,10 +6,18 @@ import {
   removeHotel,
   updateHotel,
 } from '../controllers/hotels.controller.ts';
+import { isAuthenticated } from '../middlewares/isAuthenticated.ts';
 
+//get hotels (open)
 hotelRoutes.get('/hotels-list', getHotels);
-hotelRoutes.post('/add-new-hotel', addNewHotel); //Protected admin only
-hotelRoutes.put('/edit/hotel/:hotelId', updateHotel); //Protected admin only
-hotelRoutes.delete('/remove/hotel/:hotelId', removeHotel); //Protected admin only
+
+//add new hotel (Admin only)
+hotelRoutes.post('/add-new-hotel', isAuthenticated, addNewHotel);
+
+//update hotel (Admin only)
+hotelRoutes.put('/edit/hotel/:hotelId', isAuthenticated, updateHotel);
+
+//delete hotel (Admin only)
+hotelRoutes.delete('/remove/hotel/:hotelId', removeHotel);
 
 export default hotelRoutes;

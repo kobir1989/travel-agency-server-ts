@@ -8,9 +8,16 @@ import {
 
 const roomRoutes = Router();
 
+//get rooms (open)
 roomRoutes.get('/rooms/:hotelId', getRooms);
-roomRoutes.post('/add-room', addNewRoom); //Protected admin only
-roomRoutes.put('/update-room/:roomId', updateRoom); //Protected admin only
-roomRoutes.delete('/remove-room/:roomId', removeRoom); //Protected admin only
+
+//add new room (Admin only)
+roomRoutes.post('/add-room', addNewRoom);
+
+//update rooms (Admin only)
+roomRoutes.put('/update-room/:roomId', updateRoom);
+
+//delete rooms (Admin only)
+roomRoutes.delete('/remove-room/:roomId', removeRoom);
 
 export default roomRoutes;

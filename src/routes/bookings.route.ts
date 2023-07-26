@@ -12,22 +12,52 @@ import {
 import { isAuthenticated } from '../middlewares/isAuthenticated.ts';
 const bookingRoutes = Router();
 
-//hotel bookings
-bookingRoutes.get('/hotel/bookings', isAuthenticated, getBookingDetails); //Protected
-bookingRoutes.post('/hotel/add-new-booking/', createNewBooking); //Protected
-bookingRoutes.put('/hotel/update-booking/:hotelBookingId', createNewBooking); //Protected
-bookingRoutes.delete('/hotel/remove-booking/:hotelBookingId', createNewBooking); //Protected
+//get hotel bookings (protected)
+bookingRoutes.get('/hotel/bookings', isAuthenticated, getBookingDetails);
 
-//flight bookings
-bookingRoutes.get('/flight/bookings', getFlightBooking); //Protected
-bookingRoutes.post('/flight/add-new-booking', addNewFlightBooking); //Protected
+//create new hotel booking (protected)
+bookingRoutes.post(
+  '/hotel/add-new-booking/',
+  isAuthenticated,
+  createNewBooking
+);
+
+//update hotel booking (protected)
+bookingRoutes.put(
+  '/hotel/update-booking/:hotelBookingId',
+  isAuthenticated,
+  createNewBooking
+);
+
+//delete hotel booking (protected)
+bookingRoutes.delete(
+  '/hotel/remove-booking/:hotelBookingId',
+  isAuthenticated,
+  createNewBooking
+);
+
+//get flight bookings (protected)
+bookingRoutes.get('/flight/bookings', isAuthenticated, getFlightBooking);
+
+//create new hotel booking (protected)
+bookingRoutes.post(
+  '/flight/add-new-booking',
+  isAuthenticated,
+  addNewFlightBooking
+);
+
+//update flight booking (protected)
 bookingRoutes.put(
   '/flight/update-booking/:flightBookingId',
+  isAuthenticated,
   updateFlightBookingDetails
-); //Protected
+);
+
+//delete flight booking (protected)
 bookingRoutes.delete(
   '/flight/cancel-booking/:flightBookingId',
+  isAuthenticated,
   removeFlightBooking
-); //Protected
+);
 
 export default bookingRoutes;
