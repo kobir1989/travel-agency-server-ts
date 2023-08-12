@@ -6,7 +6,8 @@ export const validateHotelDTO = (dto: HotelDTO): object | null => {
     !dto.country ||
     !dto.city ||
     !dto.ratings ||
-    !dto.availableRoom ||
+    !dto.nearby ||
+    !dto.facilities ||
     !dto.images ||
     !dto.description
   ) {

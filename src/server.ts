@@ -8,6 +8,7 @@ import roomRoutes from './routes/rooms.route.ts';
 import bookingRoutes from './routes/bookings.route.ts';
 import authRoutes from './routes/auth.route.ts';
 import flightRoutes from './routes/flight.route.ts';
+import tourRoutes from './routes/toursRoute.ts';
 
 const app: Express = express();
 //cors
@@ -27,6 +28,7 @@ app.use('/api/v1', roomRoutes);
 app.use('/api/v1', bookingRoutes);
 app.use('/api/v1', authRoutes);
 app.use('/api/v1/', flightRoutes);
+app.use('/api/v1', tourRoutes);
 
 //listener
 app.listen(envConfig.PORT, async () => {

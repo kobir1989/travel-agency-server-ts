@@ -4,7 +4,8 @@ export interface HotelDTO {
   country: string;
   city: string;
   ratings: number;
-  availableRoom: string;
+  nearby: string;
+  facilities: string;
   images: string[];
   description: string;
 }

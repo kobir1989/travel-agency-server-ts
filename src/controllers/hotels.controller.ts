@@ -15,7 +15,7 @@ import { HotelDTO } from '../types/hotelTypes.ts';
  ************************************************************/
 export const addNewHotel = async (req: Request, res: Response) => {
   try {
-    //check if the user role is Admin
+    // check if the user role is Admin
     if (req.user && req.user.role !== 'ADMIN') {
       return res
         .status(401)
@@ -25,12 +25,12 @@ export const addNewHotel = async (req: Request, res: Response) => {
     const dto: HotelDTO = req.body;
     //Validate add new hotel incoming request DTO
     const addNewHotelError = validateHotelDTO(dto);
-    if (!addNewHotelError) {
+    if (addNewHotelError) {
       return res.status(422).json(addNewHotelError);
     }
 
     //add new hotel to database
-    const newHotel = await HotelsList.create({ dto });
+    const newHotel = await HotelsList.create(dto);
 
     //response with status 201 and hotel object
     res.status(201).json({ success: true, newHotel });
